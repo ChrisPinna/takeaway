@@ -15,7 +15,13 @@ class Shop {
   }
 
   selectItem(itemId, quantity) {
-
+    this.menu.forEach(dish => 
+      { 
+        if (dish.dishId === itemId) {
+        this.order.addItem(dish.name, dish.priceInPence, quantity);
+        }; 
+      }
+    );
   }
 
   showOrder() {
@@ -28,7 +34,10 @@ class Shop {
 
   #menuBuiler() {
     let menuString = ``;
-    this.menu.forEach(dish => menuString += `${dish.dishId}- ${dish.name} £${this.#convertToPounds(dish.priceInPence)}\n`);
+    this.menu.forEach(
+      dish => 
+      menuString += `${dish.dishId}- ${dish.name} £${this.#convertToPounds(dish.priceInPence)}\n`
+      );
     return menuString;
   }
 }
