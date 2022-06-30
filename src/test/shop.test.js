@@ -23,4 +23,3 @@ describe('showOrder method', () => {
     expect(shop.showOrder()).toBe("Your basket is empty");
   });
 });
-

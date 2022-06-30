@@ -15,17 +15,22 @@ class Shop {
   }
 
   selectItem(itemId, quantity) {
-    this.menu.forEach(dish => 
+    this.menu.forEach
+    (dish => 
       { 
         if (dish.dishId === itemId) {
-        this.order.addItem(dish.name, dish.priceInPence, quantity);
-        }; 
+        this.order.addItem(dish.name, this.#calculateItemPrice(dish.priceInPence, quantity), quantity);
+        };
       }
     );
   }
 
   showOrder() {
-    return "Your basket is empty";
+    return this.order.buildOrder();
+  }
+
+  #calculateItemPrice(dishPrice, quantity) {
+    return dishPrice * quantity;
   }
 
   #convertToPounds(pence) {
@@ -34,9 +39,8 @@ class Shop {
 
   #menuBuiler() {
     let menuString = ``;
-    this.menu.forEach(
-      dish => 
-      menuString += `${dish.dishId}- ${dish.name} £${this.#convertToPounds(dish.priceInPence)}\n`
+    this.menu.forEach( dish => 
+        menuString += `${dish.dishId}- ${dish.name} £${this.#convertToPounds(dish.priceInPence)}\n`
       );
     return menuString;
   }
