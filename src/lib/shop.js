@@ -15,23 +15,30 @@ class Shop {
   }
 
   selectItem(itemId, quantity) {
-    if (isNaN(itemId) || isNaN(quantity)) {
+    if (this.#argumentsAreNotNumbers(itemId, quantity)) {
       throw 'Error: Only numbers allowed as arguments!'
     } else {
-      this.menu.forEach
-    (dish => 
-      { 
-        if (dish.dishId === itemId) {
-        this.order.addItem(dish.name, this.#calculateItemPrice(dish.priceInPence, quantity), quantity);
-        };
-      }
-    );
+      this.#addItemToOrder(itemId, quantity);
     }
   }
 
   showOrder() {
     return this.order.buildOrder();
   }
+  
+  #addItemToOrder(itemId, quantity) {
+    this.menu.forEach(dish => {
+      if (dish.dishId === itemId) {
+        this.order.addItem(dish.name, this.#calculateItemPrice(dish.priceInPence, quantity), quantity);
+      };
+    }
+    );
+  }
+
+  #argumentsAreNotNumbers(itemId, quantity) {
+    return isNaN(itemId) || isNaN(quantity);
+  }
+
 
   #calculateItemPrice(dishPrice, quantity) {
     return dishPrice * quantity;
