@@ -12,7 +12,7 @@ describe('ordering', () => {
     expect(shop.showOrder()).toBe("Your order\nBurger x1 £5.99\nTotal: £5.99");
   });
   
-  test('order 1 burger and & Chicken', () => {
+  test('order 1 burger and & 1 Chicken', () => {
     const shop = new Shop;
     shop.selectItem(1, 1);
     shop.selectItem(2, 1);

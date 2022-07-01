@@ -14,6 +14,13 @@ describe('selectItem method', () => {
       shop.selectItem(1, 2);
     }).not.toThrow();
   });
+  
+  test('should should throw error when given wrong data type as argument', () => {
+    expect(() => {
+      const shop = new Shop;
+      shop.selectItem('a', [2]);
+    }).toThrow();
+  });
 });
 
 describe('showOrder method', () => {

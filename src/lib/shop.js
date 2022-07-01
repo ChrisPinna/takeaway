@@ -15,7 +15,10 @@ class Shop {
   }
 
   selectItem(itemId, quantity) {
-    this.menu.forEach
+    if (isNaN(itemId) || isNaN(quantity)) {
+      throw 'Error: Only numbers allowed as arguments!'
+    } else {
+      this.menu.forEach
     (dish => 
       { 
         if (dish.dishId === itemId) {
@@ -23,6 +26,7 @@ class Shop {
         };
       }
     );
+    }
   }
 
   showOrder() {
