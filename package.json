@@ -1,9 +1,14 @@
 {
   "type": "module",
   "scripts": {
-  "test": "jest"
-},
+    "lint": "eslint .",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
   "dependencies": {
     "jest": "^28.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0"
   }
 }

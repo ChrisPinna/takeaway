@@ -9,7 +9,6 @@ describe('showMenu method', () => {
 
 describe('selectItem method', () => {
   test('should take a itemId and quantitie', () => {
-    const shop = new Shop;
     expect(() => {
       const shop = new Shop;
       shop.selectItem(1, 2);
