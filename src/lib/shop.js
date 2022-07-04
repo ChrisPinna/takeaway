@@ -1,4 +1,5 @@
-const Order = require('../lib/order')
+const Order = require('./order');
+const Twilio = require('./twilio');
 
 class Shop {
   constructor() {
@@ -8,6 +9,8 @@ class Shop {
       {dishId: 3, name: 'Steak', priceInPence: 1599}
     ]
     this.order =  new Order;
+    this.twilio = new Twilio;
+    this.delayTime = 1;
   }
 
   showMenu() {
@@ -25,13 +28,26 @@ class Shop {
   showOrder() {
     return this.order.buildOrder();
   }
+
+  confirmOrder() {
+    this.twilio.sendConfirmationMessage(this.#getArrivalTime());
+  }
+
+  #getArrivalTime() {
+    const orderDate = new Date;
+    return this.#padTo2Digits(orderDate.getHours() + this.delayTime) + ':' + this.#padTo2Digits(orderDate.getMinutes());
+  }
+
+  #padTo2Digits(num) {
+    return String(num).padStart(2, '0');
+  }
   
   #addItemToOrder(itemId, quantity) {
     this.menu.forEach(dish => {
-      if (dish.dishId === itemId) {
-        this.order.addItem(dish.name, this.#calculateItemPrice(dish.priceInPence, quantity), quantity);
-      };
-    }
+        if (dish.dishId === itemId) {
+          this.order.addItem(dish.name, this.#calculateItemPrice(dish.priceInPence, quantity), quantity);
+        };
+      }
     );
   }
 
